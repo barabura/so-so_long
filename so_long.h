@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 16:31:48 by baura             #+#    #+#             */
-/*   Updated: 2022/06/17 12:23:08 by baura            ###   ########.fr       */
+/*   Updated: 2022/06/17 17:33:05 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,10 @@ typedef struct s_game
 	int		exit;
 	int		steps;
 
+	void	*mlx;
+	void	*mlx_win;
+	int		img_size;
+
 	void	*empty_space_img;
 	void	*wall_img;
 	void	*collectable_img;
@@ -98,5 +102,8 @@ typedef struct s_game
 	
 }				t_game;
 
+void	error_message(char *str);
+void	convert_map_to_array(int fd, t_game *game);
+void	check_map_params(t_game *game);
 
 #endif
