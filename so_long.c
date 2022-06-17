@@ -6,12 +6,11 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 16:31:45 by baura             #+#    #+#             */
-/*   Updated: 2022/06/17 13:33:59 by baura            ###   ########.fr       */
+/*   Updated: 2022/06/17 17:08:03 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <stdio.h>
 
 void	error_message(char *str)
 {
@@ -97,8 +96,22 @@ void	convert_map_to_array(int fd, t_game *game)
 
 void	check_symbols_amount(t_game *game)
 {
-
+	int	w;
 	
+	w = 0;
+	
+	while (game->map[game->height - 1][w])
+	{
+		if (game->map[game->height - 1][w] != '1')
+			error_message("There're no walls at the bottom line");
+		w++;
+	}
+	if (game->player < 1)
+		error_message("Add player to start the game");
+	if (game->colletctible < 1)
+		error_message("Add at least 1 collectible to start the game");
+	if (game->exit < 1)
+		error_message("You need exit to finish the game");
 }
 
 void	check_map_symbols(t_game *game)
@@ -122,8 +135,6 @@ void	check_map_symbols(t_game *game)
 		if (game->map[game->height][width] == 'C')
 			game->colletctible++;
 		//printf("collectible: %d\n", game->colletctible); // comment it
-		//if (game->colletctible < 1)
-		//	error_message("There must be at least 1 collectible");
 		if (game->map[game->height][width] == 'E')
 			game->exit++;
 		//printf("exit: %d\n", game->exit); // comment it
@@ -132,12 +143,12 @@ void	check_map_symbols(t_game *game)
 	}
 }
 
-void	check_map_params(t_game *game) // ADD check last string for 1111111
+void	check_map_params(t_game *game) // ADD check last string for 1111111 - DONE
 {
 	while (game->map[0][game->width])
 	{
 		if (game->map[0][game->width] != '1')
-			error_message("There're no walls at the top");
+			error_message("There're no walls at the top line");
 		game->width += 1;
 	}
 	//printf("width: %d\n", game->width);
@@ -155,7 +166,8 @@ void	check_map_params(t_game *game) // ADD check last string for 1111111
 		if (game->height > 28) // and this one check
 			error_message("Map's too high");
 	}
-	//printf("width: %d\n", game->height);
+	//printf("height: %d\n", game->height);
+	check_symbols_amount(game);
 }
 
 int	main(int argc, char **argv)
