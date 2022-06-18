@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 16:31:48 by baura             #+#    #+#             */
-/*   Updated: 2022/06/17 17:33:05 by baura            ###   ########.fr       */
+/*   Updated: 2022/06/18 16:22:24 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ typedef struct s_game
 	void	*mlx;
 	void	*mlx_win;
 	int		img_size;
+	void	*img_ptr;
 
 	void	*empty_space_img;
 	void	*wall_img;
