@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 16:31:45 by baura             #+#    #+#             */
-/*   Updated: 2022/06/18 18:39:31 by baura            ###   ########.fr       */
+/*   Updated: 2022/06/18 19:04:39 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ int	main(int argc, char **argv)
 	
 	init_images(&game);
 	make_window(&game);
+	//mlx_key_hook(game.mlx_win, 0, &game); // change 0
 	
 	//mlx_key_hook(game.mlx_win, )
 	
