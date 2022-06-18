@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 16:31:45 by baura             #+#    #+#             */
-/*   Updated: 2022/06/18 18:25:10 by baura            ###   ########.fr       */
+/*   Updated: 2022/06/18 18:39:31 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ int	main(int argc, char **argv)
 	
 	init_images(&game);
 	make_window(&game);
-	mlx_loop(game.mlx);
+	
 	//mlx_key_hook(game.mlx_win, )
 	
 	//while (game.map[i] != NULL)
@@ -138,7 +138,7 @@ int	main(int argc, char **argv)
 	//while (game.map[0][game.width] != '\0')
 	//	game.width += 1;
 	//printf("%d", game.width);
-	
+	mlx_loop(game.mlx);
 	return (0);
 }
 
