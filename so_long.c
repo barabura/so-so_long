@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 16:31:45 by baura             #+#    #+#             */
-/*   Updated: 2022/06/18 17:52:26 by baura            ###   ########.fr       */
+/*   Updated: 2022/06/18 18:25:10 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	put_img(t_game *game, void *path, int x, int y)
 {
 	game->img_ptr = mlx_xpm_file_to_image(game->mlx, path, &game->img_size, &game->img_size);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img_ptr, x, y);
-	mlx_loop(game->mlx);
+	//mlx_loop(game->mlx);
 }
 
 /* moving image */
@@ -80,7 +80,10 @@ void	fill_window(t_game *game)
 			if (game->map[h][w] == '0')
 				put_img(game, game->empty_space_img, w * game->img_size, h * game->img_size);
 			if (game->map[h][w] == 'C')
+			{
+				put_img(game, game->empty_space_img, w * game->img_size, h * game->img_size);
 				put_img(game, game->collectable_img, w * game->img_size, h * game->img_size);
+			}
 			if (game->map[h][w] == 'P')
 				put_img(game, game->player_img, w * game->img_size, h * game->img_size);
 			if (game->map[h][w] == 'E')
@@ -121,6 +124,7 @@ int	main(int argc, char **argv)
 	
 	init_images(&game);
 	make_window(&game);
+	mlx_loop(game.mlx);
 	//mlx_key_hook(game.mlx_win, )
 	
 	//while (game.map[i] != NULL)
