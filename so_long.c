@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 16:31:45 by baura             #+#    #+#             */
-/*   Updated: 2022/06/18 19:04:39 by baura            ###   ########.fr       */
+/*   Updated: 2022/06/19 21:00:05 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	init_images(t_game *game)
 {
 	game->img_size = 100;
 	game->empty_space_img = open_image("./imgs/background.xpm");
-	game->wall_img = open_image("./imgs/box.xpm");
+	game->wall_img = open_image("./imgs/wall.xpm");
 	game->collectable_img = open_image("./imgs/coin_1.xpm");
 	game->player_img = open_image("./imgs/cat_1.xpm");
 	game->exit_img = open_image("./imgs/exit.xpm");
@@ -102,6 +102,47 @@ void	make_window(t_game *game)
 	fill_window(game);
 }
 
+// int	close_game(t_game *game)
+// {
+// 	mlx_destroy_window(game->mlx, game->mlx_win);
+// 	return (0);
+// }
+
+
+
+
+
+
+
+
+void	move_up(t_game *game)
+{
+	// int	x;
+	// int	y;
+
+	// x = game->player_x;
+	// y = game->player_y - 1;
+	
+	
+}
+
+int	key_hook(int keycode)//, t_game *game
+{
+	printf("%d\n", keycode);
+	if (keycode == 13) // W
+		/* code */;
+	if (keycode == 0) // A
+		/* code */;
+	if (keycode == 1) // S
+		/* code */;
+	if (keycode == 2) // D
+		/* code */;
+	if (keycode == 53) // ESC
+		/* code */;
+	return (0);
+}
+
+
 
 int	main(int argc, char **argv)
 {
@@ -121,12 +162,8 @@ int	main(int argc, char **argv)
 		error_message("Map opening error");
 	convert_map_to_array(fd, &game);
 	check_map_params(&game);
-	
 	init_images(&game);
 	make_window(&game);
-	//mlx_key_hook(game.mlx_win, 0, &game); // change 0
-	
-	//mlx_key_hook(game.mlx_win, )
 	
 	//while (game.map[i] != NULL)
 	//{
@@ -139,6 +176,9 @@ int	main(int argc, char **argv)
 	//while (game.map[0][game.width] != '\0')
 	//	game.width += 1;
 	//printf("%d", game.width);
+	
+	mlx_key_hook(game.mlx_win, key_hook, &game); // change 0
+	// mlx_hook(game.mlx_win, 17, 1L << 0, close_game, &game);
 	mlx_loop(game.mlx);
 	return (0);
 }

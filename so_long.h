@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 16:31:48 by baura             #+#    #+#             */
-/*   Updated: 2022/06/18 16:22:24 by baura            ###   ########.fr       */
+/*   Updated: 2022/06/19 21:11:50 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,12 @@ typedef struct s_game
 	int		height;
 	
 	int		player;
+	int		player_x;
+	int		player_y;
 	int		colletctible;
 	int		exit;
+	int		exit_x;
+	int		exit_y;
 	int		steps;
 
 	void	*mlx;
