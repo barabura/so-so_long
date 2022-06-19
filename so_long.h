@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 16:31:48 by baura             #+#    #+#             */
-/*   Updated: 2022/06/19 21:11:50 by baura            ###   ########.fr       */
+/*   Updated: 2022/06/19 21:18:32 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,6 @@ typedef struct s_game
 void	error_message(char *str);
 void	convert_map_to_array(int fd, t_game *game);
 void	check_map_params(t_game *game);
+void	make_window(t_game *game);
 
 #endif

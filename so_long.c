@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 16:31:45 by baura             #+#    #+#             */
-/*   Updated: 2022/06/19 21:00:05 by baura            ###   ########.fr       */
+/*   Updated: 2022/06/19 21:44:40 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,53 +54,39 @@ void	init_images(t_game *game)
 	game->exit_img = open_image("./imgs/exit.xpm");
 }
 
-/* fill window */
-void	put_img(t_game *game, void *path, int x, int y)
-{
-	game->img_ptr = mlx_xpm_file_to_image(game->mlx, path, &game->img_size, &game->img_size);
-	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img_ptr, x, y);
-	//mlx_loop(game->mlx);
-}
 
-/* moving image */
 
-void	fill_window(t_game *game)
-{
-	int	w;
-	int	h;
-	
-	h = 0;
-	while (h < game->height)
-	{
-		w = 0;
-		while (game->map[h][w])
-		{
-			if (game->map[h][w] == '1')
-				put_img(game, game->wall_img, w * game->img_size, h * game->img_size);
-			if (game->map[h][w] == '0')
-				put_img(game, game->empty_space_img, w * game->img_size, h * game->img_size);
-			if (game->map[h][w] == 'C')
-			{
-				put_img(game, game->empty_space_img, w * game->img_size, h * game->img_size);
-				put_img(game, game->collectable_img, w * game->img_size, h * game->img_size);
-			}
-			if (game->map[h][w] == 'P')
-				put_img(game, game->player_img, w * game->img_size, h * game->img_size);
-			if (game->map[h][w] == 'E')
-				put_img(game, game->exit_img, w * game->img_size, h * game->img_size);
-			w++;
-		}
-		h++;
-	}
-}
 
-void	make_window(t_game *game)
-{
-	game->mlx = mlx_init();
-	game->mlx_win = mlx_new_window(game->mlx, game->width * game->img_size, \
-					game->height * game->img_size, "so_long");
-	fill_window(game);
-}
+
+
+
+
+
+
+// void	move_up(t_game *game)
+// {
+// 	int	x;
+// 	int	y;
+
+// 	x = game->player_x;
+// 	y = game->player_y - 1;
+
+// }
+
+// void	move_left(t_game *game)
+// {
+// 	/* code */;
+// }
+
+// void	move_down(t_game *game)
+// {
+// 	/* code */;
+// }
+
+// void	move_right(t_game *game)
+// {
+// 	/* code */;
+// }
 
 // int	close_game(t_game *game)
 // {
@@ -108,37 +94,19 @@ void	make_window(t_game *game)
 // 	return (0);
 // }
 
-
-
-
-
-
-
-
-void	move_up(t_game *game)
-{
-	// int	x;
-	// int	y;
-
-	// x = game->player_x;
-	// y = game->player_y - 1;
-	
-	
-}
-
-int	key_hook(int keycode)//, t_game *game
+int	key_hook(int keycode)//, t_game *game)
 {
 	printf("%d\n", keycode);
-	if (keycode == 13) // W
-		/* code */;
-	if (keycode == 0) // A
-		/* code */;
-	if (keycode == 1) // S
-		/* code */;
-	if (keycode == 2) // D
-		/* code */;
+	// if (keycode == 13) // W
+	// 	move_up(game);
+	// if (keycode == 0) // A
+	// 	move_left(game);
+	// if (keycode == 1) // S
+	// 	move_down(game);
+	// if (keycode == 2) // D
+	// 	move_right(game);
 	if (keycode == 53) // ESC
-		/* code */;
+		exit(EXIT_SUCCESS);
 	return (0);
 }
 
