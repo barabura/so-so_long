@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 16:31:45 by baura             #+#    #+#             */
-/*   Updated: 2022/06/19 21:44:40 by baura            ###   ########.fr       */
+/*   Updated: 2022/06/20 22:07:57 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,60 +58,6 @@ void	init_images(t_game *game)
 
 
 
-
-
-
-
-
-// void	move_up(t_game *game)
-// {
-// 	int	x;
-// 	int	y;
-
-// 	x = game->player_x;
-// 	y = game->player_y - 1;
-
-// }
-
-// void	move_left(t_game *game)
-// {
-// 	/* code */;
-// }
-
-// void	move_down(t_game *game)
-// {
-// 	/* code */;
-// }
-
-// void	move_right(t_game *game)
-// {
-// 	/* code */;
-// }
-
-// int	close_game(t_game *game)
-// {
-// 	mlx_destroy_window(game->mlx, game->mlx_win);
-// 	return (0);
-// }
-
-int	key_hook(int keycode)//, t_game *game)
-{
-	printf("%d\n", keycode);
-	// if (keycode == 13) // W
-	// 	move_up(game);
-	// if (keycode == 0) // A
-	// 	move_left(game);
-	// if (keycode == 1) // S
-	// 	move_down(game);
-	// if (keycode == 2) // D
-	// 	move_right(game);
-	if (keycode == 53) // ESC
-		exit(EXIT_SUCCESS);
-	return (0);
-}
-
-
-
 int	main(int argc, char **argv)
 {
 	t_game	game;
@@ -146,7 +92,7 @@ int	main(int argc, char **argv)
 	//printf("%d", game.width);
 	
 	mlx_key_hook(game.mlx_win, key_hook, &game); // change 0
-	// mlx_hook(game.mlx_win, 17, 1L << 0, close_game, &game);
+	mlx_hook(game.mlx_win, 17, 1L << 0, close_game, &game);
 	mlx_loop(game.mlx);
 	return (0);
 }

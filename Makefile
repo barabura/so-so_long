@@ -6,7 +6,7 @@
 #    By: baura <baura@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/10 16:31:33 by baura             #+#    #+#              #
-#    Updated: 2022/06/19 21:18:18 by baura            ###   ########.fr        #
+#    Updated: 2022/06/20 22:13:56 by baura            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ NAME 	= so_long
 
 LIB 	= libft/libft.a
 
-SRCS 	= 	so_long.c	so_long_utils.c		map_check.c		map_transform.c		window.c
+SRCS 	= 	so_long.c	so_long_utils.c		map_check.c		map_transform.c		window.c \
+			moves.c
 
 # SRCS_B 	= 	
 

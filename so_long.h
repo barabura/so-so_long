@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 16:31:48 by baura             #+#    #+#             */
-/*   Updated: 2022/06/19 21:18:32 by baura            ###   ########.fr       */
+/*   Updated: 2022/06/20 22:14:23 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,9 @@ void	error_message(char *str);
 void	convert_map_to_array(int fd, t_game *game);
 void	check_map_params(t_game *game);
 void	make_window(t_game *game);
+void	put_img(t_game *game, void *path, int x, int y);
+
+int		key_hook(int keycode, t_game *game);
+int		close_game(t_game *game);
 
 #endif
