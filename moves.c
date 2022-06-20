@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 22:06:41 by baura             #+#    #+#             */
-/*   Updated: 2022/06/20 22:24:02 by baura            ###   ########.fr       */
+/*   Updated: 2022/06/21 00:12:22 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	close_game(t_game *game)
 {
-	mlx_destroy_window(game->mlx, game->mlx_win);
+    (void) game;
+	// mlx_destroy_window(game->mlx, game->mlx_win);
 	exit (EXIT_SUCCESS);
 }
 
@@ -45,24 +46,26 @@ int	move_check(t_game *game, int x, int y)
 		put_img(game, game->player_img, x * game->img_size, y * game->img_size);
 		put_img(game, game->empty_space_img, game->player_x * game->img_size, \
 				game->player_y * game->img_size);
-		return (0);
+		return (1);
 	}
-	else if (game->map[y][x] == 'C')
+	if (game->map[y][x] == 'C')
 	{
-		put_img(game, game->empty_space_img, x * game->img_size, y * game->img_size); // заменяем бг коллект
 		put_img(game, game->player_img, x * game->img_size, y * game->img_size);
 		put_img(game, game->empty_space_img, game->player_x * game->img_size, \
 				game->player_y * game->img_size);
 		game->colletctible--;
 		check_collectibles(game);
-		return (0);
+		return (1);
 	}
-	else if (game->map[y][x] == 'E') // check
+	if (game->map[y][x] == 'E') // check
 	{
 		if (game->exit == 1)
-			close_game(game);
+		{
+            mlx_destroy_window(game->mlx, game->mlx_win);
+            exit(EXIT_SUCCESS);
+        }
 	}
-	return (1);
+	return (0);
 }
 
 void	move_up(t_game *game)
@@ -77,8 +80,9 @@ void	move_up(t_game *game)
 		game->map[game->player_y][x] = '0';
 		game->map[y][x] = 'P';
 		game->player_y = y;
-		game->steps++;
+        game->steps++;
 		print_steps(game);
+		printf("player: [%d][%d]\n", game->player_y, game->player_x);
 	}
 }
 
@@ -96,6 +100,7 @@ void	move_left(t_game *game)
 		game->player_x = x;
 		game->steps++;
 		print_steps(game);
+        printf("player: [%d][%d]\n", game->player_y, game->player_x);
 	}
 }
 
@@ -113,6 +118,7 @@ void	move_down(t_game *game)
 		game->player_y = y;
 		game->steps++;
 		print_steps(game);
+        printf("player: [%d][%d]\n", game->player_y, game->player_x);
 	}
 }
 
@@ -130,6 +136,7 @@ void	move_right(t_game *game)
 		game->player_x = x;
 		game->steps++;
 		print_steps(game);
+        printf("player: [%d][%d]\n", game->player_y, game->player_x);
 	}
 }
 
@@ -138,13 +145,16 @@ int	key_hook(int keycode, t_game *game)
 	printf("%d\n", keycode);
 	if (keycode == 13) // W
 		move_up(game);
-	if (keycode == 0) // A
+	else if (keycode == 0) // A
 		move_left(game);
-	if (keycode == 1) // S
+	else if (keycode == 1) // S
 		move_down(game);
-	if (keycode == 2) // D
+	else if (keycode == 2) // D
 		move_right(game);
-	if (keycode == 53) // ESC
+	else if (keycode == 53) // ESC
+    {
+        mlx_destroy_window(game->mlx, game->mlx_win);
 		exit(EXIT_SUCCESS);
+    }
 	return (0);
 }
