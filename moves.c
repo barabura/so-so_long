@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 22:06:41 by baura             #+#    #+#             */
-/*   Updated: 2022/06/21 00:58:43 by baura            ###   ########.fr       */
+/*   Updated: 2022/06/21 02:35:06 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int	close_game(t_game *game)
 {
-    (void) game;
+	(void) game;
 	// mlx_destroy_window(game->mlx, game->mlx_win);
 	exit (EXIT_SUCCESS);
 }
@@ -35,6 +35,7 @@ void	check_collectibles(t_game *game)
 {
 	if (game->colletctible == 0)
 	{
+		// put_img(game, game->empty_space_img, game->exit_x * game->img_size, game->exit_y * game->img_size);
 		// put_img(game, game->open_exit_img, game->exit_x * game->img_size, game->exit_y * game->img_size);
 		game->exit -= 1;
 	}
@@ -62,13 +63,15 @@ bool    move_check(t_game *game, int x, int y)
 	{
         if (game->exit == 0)
         {
-            ft_putstr_fd("You won! Well done!\n", 1);
-            mlx_destroy_window(game->mlx, game->mlx_win);
-            exit(EXIT_SUCCESS);
-        }
+			put_img(game, game->empty_space_img, game->player_x * game->img_size, \
+            		game->player_y * game->img_size);
+			ft_putstr_fd("You won! Well done!\n", 1);
+			mlx_destroy_window(game->mlx, game->mlx_win);
+			exit(EXIT_SUCCESS);
+		}
         ft_putstr_fd("You need to collect all coins to open the box\n", 1);
 	}
-	return (false);
+	    return (false);
 }
 
 void	move_up(t_game *game)

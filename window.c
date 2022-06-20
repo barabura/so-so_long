@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 21:17:06 by baura             #+#    #+#             */
-/*   Updated: 2022/06/20 22:18:55 by baura            ###   ########.fr       */
+/*   Updated: 2022/06/21 02:14:57 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	fill_window(t_game *game)
 			}
 			if (game->map[h][w] == 'E')
 			{
+				put_img(game, game->empty_space_img, w * game->img_size, h * game->img_size);
 				put_img(game, game->exit_img, w * game->img_size, h * game->img_size);
 				game->exit_x = w;
 				game->exit_y = h;

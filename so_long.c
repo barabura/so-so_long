@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 16:31:45 by baura             #+#    #+#             */
-/*   Updated: 2022/06/21 00:46:56 by baura            ###   ########.fr       */
+/*   Updated: 2022/06/21 02:14:07 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	init_images(t_game *game)
 	game->wall_img = open_image("./imgs/wall.xpm");
 	game->collectable_img = open_image("./imgs/coin_1.xpm");
 	game->player_img = open_image("./imgs/cat_1.xpm");
-	game->exit_img = open_image("./imgs/exit.xpm");
+	game->exit_img = open_image("./imgs/closed_box.xpm");
 }
 
 
