@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 22:06:41 by baura             #+#    #+#             */
-/*   Updated: 2022/06/21 02:35:06 by baura            ###   ########.fr       */
+/*   Updated: 2022/06/21 03:34:01 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,40 @@ void	check_collectibles(t_game *game)
 	}
 }
 
-bool    move_check(t_game *game, int x, int y) 
+int    move_check(t_game *game, int x, int y) 
+{
+	if (game->map[y][x] == '0')
+	{
+		put_img(game, game->player_img, x * game->img_size, y * game->img_size);
+		put_img(game, game->empty_space_img, game->player_x * game->img_size, \
+				game->player_y * game->img_size);
+		return (1);
+	}
+	if (game->map[y][x] == 'C')
+	{
+		put_img(game, game->player_img, x * game->img_size, y * game->img_size);
+		put_img(game, game->empty_space_img, game->player_x * game->img_size, \
+				game->player_y * game->img_size);
+		game->colletctible -= 1;
+		check_collectibles(game);
+		return (1);
+	}
+	if (game->map[y][x] == 'E') // check
+	{
+        if (game->exit == 0)
+        {
+			put_img(game, game->empty_space_img, game->player_x * game->img_size, \
+            		game->player_y * game->img_size);
+			ft_putstr_fd("You won! Well done!\n", 1);
+			mlx_destroy_window(game->mlx, game->mlx_win);
+			exit(EXIT_SUCCESS);
+		}
+        ft_putstr_fd("You need to collect all coins to open the box\n", 1);
+	}
+	    return (0);
+}
+
+/*bool    move_check(t_game *game, int x, int y) 
 {
 	if (game->map[y][x] == '0')
 	{
@@ -72,7 +105,7 @@ bool    move_check(t_game *game, int x, int y)
         ft_putstr_fd("You need to collect all coins to open the box\n", 1);
 	}
 	    return (false);
-}
+} */
 
 void	move_up(t_game *game)
 {
