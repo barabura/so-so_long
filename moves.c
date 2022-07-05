@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 22:06:41 by baura             #+#    #+#             */
-/*   Updated: 2022/07/05 15:48:44 by baura            ###   ########.fr       */
+/*   Updated: 2022/07/05 18:18:52 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	print_steps(t_game *game) // bonus
 	char	*s;
 
 	s = ft_itoa(game->steps);
-	put_img(game, game->wall_img, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->mlx_win, game->wall_img, 0, 0);
 	mlx_string_put(game->mlx, game->mlx_win, 10, 10, 0x000000, "Steps: ");
 	mlx_string_put(game->mlx, game->mlx_win, 75, 10, 0x000000, s);
 	free(s);
@@ -46,7 +46,7 @@ void	check_collectibles(t_game *game)
 {
 	if (game->colletctible == 0)
 	{
-		put_img(game, game->empty_space_img, game->exit_x * game->img_size, game->exit_y * game->img_size); //bonus
+		mlx_put_image_to_window(game->mlx, game->mlx_win, game->empty_space_img, game->exit_x * game->img_size, game->exit_y * game->img_size); // bonus
 		put_img(game, "./imgs/open_box.xpm", game->exit_x * game->img_size, game->exit_y * game->img_size); //bonus
 		game->exit -= 1;
 	}
@@ -56,16 +56,14 @@ int    move_check(t_game *game, int x, int y)
 {
 	if (game->map[y][x] == '0')
 	{
-		put_img(game, game->player_img, x * game->img_size, y * game->img_size);
-		put_img(game, game->empty_space_img, game->player_x * game->img_size, \
-				game->player_y * game->img_size);
+		mlx_put_image_to_window(game->mlx, game->mlx_win, game->player_img, x * game->img_size, y * game->img_size);
+		mlx_put_image_to_window(game->mlx, game->mlx_win, game->empty_space_img, game->player_x * game->img_size, game->player_y * game->img_size);
 		return (1);
 	}
 	if (game->map[y][x] == 'C')
 	{
-		put_img(game, game->player_img, x * game->img_size, y * game->img_size);
-		put_img(game, game->empty_space_img, game->player_x * game->img_size, \
-				game->player_y * game->img_size);
+		mlx_put_image_to_window(game->mlx, game->mlx_win, game->player_img, x * game->img_size, y * game->img_size);
+		mlx_put_image_to_window(game->mlx, game->mlx_win, game->empty_space_img, game->player_x * game->img_size, game->player_y * game->img_size);
 		game->colletctible -= 1;
 		check_collectibles(game);
 		return (1);
@@ -74,8 +72,7 @@ int    move_check(t_game *game, int x, int y)
 	{
         if (game->exit == 0)
         {
-			put_img(game, game->empty_space_img, game->player_x * game->img_size, \
-            		game->player_y * game->img_size);
+			mlx_put_image_to_window(game->mlx, game->mlx_win, game->empty_space_img, game->player_x * game->img_size, game->player_y * game->img_size);
 			ft_putstr_fd("You won! Well done!\n", 1);
 			mlx_destroy_window(game->mlx, game->mlx_win);
 			exit(EXIT_SUCCESS);
