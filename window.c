@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 21:17:06 by baura             #+#    #+#             */
-/*   Updated: 2022/07/05 14:13:04 by baura            ###   ########.fr       */
+/*   Updated: 2022/07/05 15:29:37 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,15 @@ void	put_img(t_game *game, void *path, int x, int y)
 	if (game->img_ptr == NULL)
 		error_message("Image opening error");
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img_ptr, x, y);
+}
+
+void	check_coins_near(t_game *game) // bonus
+{
+	if ((game->map[game->player_y][game->player_x + 1] == 'C') ||
+		(game->map[game->player_y][game->player_x - 1] == 'C') ||
+		(game->map[game->player_y + 1][game->player_x] == 'C') ||
+		(game->map[game->player_y - 1][game->player_x] == 'C'))
+			put_img(game, "./imgs/cat_2.xpm", game->player_x * game->img_size, game->player_y * game->img_size);
 }
 
 void	fill_window(t_game *game)
@@ -45,6 +54,7 @@ void	fill_window(t_game *game)
 				put_img(game, game->player_img, w * game->img_size, h * game->img_size);
 				game->player_x = w;
 				game->player_y = h;
+				check_coins_near(game); // bonus
 			}
 			if (game->map[h][w] == 'E')
 			{
@@ -53,24 +63,6 @@ void	fill_window(t_game *game)
 				game->exit_x = w;
 				game->exit_y = h;
 			}
-			// if (game->map[h][w] == '1')
-			// 	put_img(game, game->wall_img, w * game->img_size, h * game->img_size);
-			// else
-			// 	put_img(game, game->empty_space_img, w * game->img_size, h * game->img_size);
-			// if (game->map[h][w] == 'C')
-			// 	put_img(game, game->collectable_img, w * game->img_size, h * game->img_size);
-			// if (game->map[h][w] == 'P')
-			// {
-			// 	put_img(game, game->player_img, w * game->img_size, h * game->img_size);
-			// 	game->player_x = w;
-			// 	game->player_y = h;
-			// }
-			// if (game->map[h][w] == 'E')
-			// {
-			// 	put_img(game, game->exit_img, w * game->img_size, h * game->img_size);
-			// 	game->exit_x = w;
-			// 	game->exit_y = h;
-			// }
 		}
 	}
 }
