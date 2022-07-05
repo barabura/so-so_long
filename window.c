@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 21:17:06 by baura             #+#    #+#             */
-/*   Updated: 2022/07/05 18:19:33 by baura            ###   ########.fr       */
+/*   Updated: 2022/07/05 19:25:45 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	check_coins_near(t_game *game) // bonus
 		(game->map[game->player_y][game->player_x - 1] == 'C') ||
 		(game->map[game->player_y + 1][game->player_x] == 'C') ||
 		(game->map[game->player_y - 1][game->player_x] == 'C'))
-		put_img(game, "./imgs/cat_2.xpm", game->player_x * game->img_size, game->player_y * game->img_size);
+		mlx_put_image_to_window(game->mlx, game->mlx_win, game->player2_img, game->player_x * game->img_size, game->player_y * game->img_size);
 }
 
 void	fill_window(t_game *game)
@@ -72,5 +72,5 @@ void	make_window(t_game *game)
 	game->mlx = mlx_init();
 	game->mlx_win = mlx_new_window(game->mlx, game->width * game->img_size, \
 					game->height * game->img_size, "so_long");
-	fill_window(game);
+	// fill_window(game);
 }

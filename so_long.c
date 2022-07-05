@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 16:31:45 by baura             #+#    #+#             */
-/*   Updated: 2022/07/05 18:11:49 by baura            ###   ########.fr       */
+/*   Updated: 2022/07/05 19:35:48 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,15 @@ void	init_images(t_game *game)
 	game->empty_space_img = mlx_xpm_file_to_image(game->mlx, "./imgs/background.xpm", &game->img_size, &game->img_size);
 	game->wall_img = mlx_xpm_file_to_image(game->mlx, "./imgs/wall.xpm", &game->img_size, &game->img_size);
 	game->collectable_img = mlx_xpm_file_to_image(game->mlx, "./imgs/coin_1.xpm", &game->img_size, &game->img_size);
+	game->collectable2_img = mlx_xpm_file_to_image(game->mlx, "./imgs/coin_2.xpm", &game->img_size, &game->img_size);
+	game->collectable3_img = mlx_xpm_file_to_image(game->mlx, "./imgs/coin_3.xpm", &game->img_size, &game->img_size);
+	game->collectable4_img = mlx_xpm_file_to_image(game->mlx, "./imgs/coin_4.xpm", &game->img_size, &game->img_size);
+	game->collectable5_img = mlx_xpm_file_to_image(game->mlx, "./imgs/coin_5.xpm", &game->img_size, &game->img_size);
+	game->collectable6_img = mlx_xpm_file_to_image(game->mlx, "./imgs/coin_6.xpm", &game->img_size, &game->img_size);
 	game->player_img = mlx_xpm_file_to_image(game->mlx, "./imgs/cat_1.xpm", &game->img_size, &game->img_size);
-	game->exit_img = mlx_xpm_file_to_image(game->mlx, "./imgs/closed_box.xpm", &game->img_size, &game->img_size);
+	game->player2_img = mlx_xpm_file_to_image(game->mlx, "./imgs/cat_2.xpm", &game->img_size, &game->img_size);
+	game->exit_img = mlx_xpm_file_to_image(game->mlx, "./imgs/closed_box.xpm", &game->img_size, &game->img_size);	
+	// game->exit2_img = mlx_xpm_file_to_image(game->mlx, "./imgs/open_box.xpm", &game->img_size, &game->img_size);
 }
 
 t_game	*init(void)
@@ -155,8 +162,9 @@ int	main(int argc, char **argv)
 	// make_window(&game);
 	convert_map_to_array(fd, game);
 	check_map_params(game);
-	init_images(game);
 	make_window(game);
+	init_images(game);
+	fill_window(game);
 	
 	//while (game.map[i] != NULL)
 	//{

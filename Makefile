@@ -6,7 +6,7 @@
 #    By: baura <baura@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/10 16:31:33 by baura             #+#    #+#              #
-#    Updated: 2022/06/20 22:13:56 by baura            ###   ########.fr        #
+#    Updated: 2022/07/05 19:23:40 by baura            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ OBJS 	= $(SRCS:%.c=%.o)
 OBJS_B 	= $(SRCS_B:%.c=%.o)
 
 HEADER 	= so_long.h
-FLAGS 	= -Wall -Wextra -Werror
+FLAGS 	= -Wall -Wextra -Werror -g
 LFLAGS 	= -L libft/ -lft
 CC 		= gcc
 RM 		= rm -f
@@ -35,6 +35,7 @@ RM 		= rm -f
 all		:	$(NAME)
 
 $(NAME) :	$(OBJS) $(HEADER) $(LIB)
+			@make -C mlx/
 			$(CC) $(FLAGS) $(LFLAGS) $(OBJS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 # bonus 	:	$(NAME_B)
@@ -54,6 +55,7 @@ do :
 clean : 
 	$(RM) $(OBJS) $(OBJ_B)
 	@make clean -C libft/
+	@make clean -C mlx/
 
 fclean : clean
 	$(RM) $(NAME) $(NAME_B)

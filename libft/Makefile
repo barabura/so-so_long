@@ -6,7 +6,7 @@
 #    By: baura <baura@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/14 20:19:06 by baura             #+#    #+#              #
-#    Updated: 2022/04/11 18:09:51 by baura            ###   ########.fr        #
+#    Updated: 2022/07/05 19:08:53 by baura            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ OBJ = $(LIST:%.c=%.o)
 OBJ_B = $(LIST_B:%.c=%.o)
 
 HEADER = libft.h
-FLAGS = -Wall -Wextra -Werror -I$(HEADER)
+FLAGS = -Wall -Wextra -Werror
+# -I$(HEADER)
 CC = gcc
 RM = rm -f
 

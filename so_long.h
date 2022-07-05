@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 16:31:48 by baura             #+#    #+#             */
-/*   Updated: 2022/07/05 15:29:48 by baura            ###   ########.fr       */
+/*   Updated: 2022/07/05 19:35:53 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,19 @@ typedef struct s_game
 
 	void	*empty_space_img;
 	void	*wall_img;
+	
 	void	*collectable_img;
+	void	*collectable2_img;
+	void	*collectable3_img;
+	void	*collectable4_img;
+	void	*collectable5_img;
+	void	*collectable6_img;
+	
 	void	*exit_img;
+	// void	*exit2_img;
+	
 	void	*player_img;
+	void	*player2_img;
 
 }				t_game;
 
@@ -64,5 +74,6 @@ int		close_game(t_game *game);
 
 // int	render_next_frame(t_game *game);
 void	check_coins_near(t_game *game);
+void	fill_window(t_game *game); 
 
 #endif
