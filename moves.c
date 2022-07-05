@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 22:06:41 by baura             #+#    #+#             */
-/*   Updated: 2022/07/05 15:33:43 by baura            ###   ########.fr       */
+/*   Updated: 2022/07/05 15:48:44 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	check_collectibles(t_game *game)
 {
 	if (game->colletctible == 0)
 	{
-		// put_img(game, game->empty_space_img, game->exit_x * game->img_size, game->exit_y * game->img_size); //bonus
-		// put_img(game, game->open_exit_img, game->exit_x * game->img_size, game->exit_y * game->img_size); //bonus
+		put_img(game, game->empty_space_img, game->exit_x * game->img_size, game->exit_y * game->img_size); //bonus
+		put_img(game, "./imgs/open_box.xpm", game->exit_x * game->img_size, game->exit_y * game->img_size); //bonus
 		game->exit -= 1;
 	}
 }
@@ -157,8 +157,6 @@ void	move_right(t_game *game)
 	}
 }
 
-
-
 int	key_hook(int keycode, t_game *game)
 {
 	// printf("%d\n", keycode);
@@ -168,13 +166,13 @@ int	key_hook(int keycode, t_game *game)
         mlx_destroy_window(game->mlx, game->mlx_win);
 		exit(EXIT_SUCCESS);
     }
-	else if (keycode == 13) // W
+	else if (keycode == 13 || keycode == 126) // W || ^
 		move_up(game);
-	else if (keycode == 0) // A
+	else if (keycode == 0 || keycode == 123) // A || <
 		move_left(game);
-	else if (keycode == 1) // S
+	else if (keycode == 1 || keycode == 125) // S || \/
 		move_down(game);
-	else if (keycode == 2) // D
+	else if (keycode == 2 || keycode == 124) // D || >
 		move_right(game);
 	check_coins_near(game); // bonus
 	return (0);
