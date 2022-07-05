@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 16:31:45 by baura             #+#    #+#             */
-/*   Updated: 2022/06/21 02:14:07 by baura            ###   ########.fr       */
+/*   Updated: 2022/07/05 12:08:01 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	error_message(char *str)
 {
-	ft_putstr_fd("Error: ", STDERR_FILENO); //STDERR_FILENO
-	ft_putstr_fd(str, STDERR_FILENO);
-	write(1, "\n", STDERR_FILENO);
+	ft_putstr_fd("Error: ", 1);
+	ft_putstr_fd(str, 1);
+	write(1, "\n", 1);
 	exit(EXIT_FAILURE);
 }
 
@@ -28,6 +28,7 @@ void	init_game(t_game *game)
 	game->colletctible = 0;
 	game->exit = 0;
 	game->steps = 0;
+	game->img_size = 100;
 }
 
 void	check_argument(char *arg)
@@ -36,27 +37,14 @@ void	check_argument(char *arg)
 		error_message("Your map must have .ber file extension");
 }
 
-/* init image */
-char	*open_image(char *path)
-{
-	if (open(path, O_RDONLY) < 0)
-		error_message("Image opening error");
-	return (path);
-}
-
 void	init_images(t_game *game)
 {
-	game->img_size = 100;
-	game->empty_space_img = open_image("./imgs/background.xpm");
-	game->wall_img = open_image("./imgs/wall.xpm");
-	game->collectable_img = open_image("./imgs/coin_1.xpm");
-	game->player_img = open_image("./imgs/cat_1.xpm");
-	game->exit_img = open_image("./imgs/closed_box.xpm");
+	game->empty_space_img = "./imgs/background.xpm";
+	game->wall_img = "./imgs/wall.xpm";
+	game->collectable_img = "./imgs/coin_1.xpm";
+	game->player_img = "./imgs/cat_1.xpm";
+	game->exit_img = "./imgs/closed_box.xpm";
 }
-
-
-
-
 
 int	main(int argc, char **argv)
 {
@@ -93,42 +81,7 @@ int	main(int argc, char **argv)
 	
 	mlx_key_hook(game.mlx_win, key_hook, &game); // change 0
 	mlx_hook(game.mlx_win, 17, 1L << 0, close_game, &game);
+	mlx_loop_hook(game.mlx, render_next_frame, &game);
 	mlx_loop(game.mlx);
 	return (0);
 }
-
-//int	main(void)
-//{
-//	char	*line;
-//	int		i;
-//	int		fd1;
-//	/*int		fd1;
-//	int		fd2;
-//	int		fd3;*/
-//	//fd = 0;
-//	fd1 = open("map.ber", O_RDONLY);
-//	/*fd2 = open("tests/file2.txt", O_RDONLY);
-//	fd3 = open("tests/file3.txt", O_RDONLY)*/
-//	i = 1;
-//	while (i < 7)
-//	{
-//		line = get_next_line(fd1);
-//		ft_putstr_fd(line, 1);
-//		//printf("line [%02d]: %s", i, line);
-//		free(line);
-//		/*line = get_next_line(fd1);
-//		printf("line [%02d]: %s", i, line);
-//		free(line);
-//		line = get_next_line(fd2);
-//		printf("line [%02d]: %s", i, line);
-//		free(line);
-//		line = get_next_line(fd3);
-//		printf("line [%02d]: %s", i, line);
-//		free(line);*/
-//		i++;
-//	}
-//	close(fd1);
-//	/*close(fd2);
-//	close(fd3);*/
-//	return (0);
-//}

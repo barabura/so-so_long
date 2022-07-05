@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 22:06:41 by baura             #+#    #+#             */
-/*   Updated: 2022/06/21 03:34:01 by baura            ###   ########.fr       */
+/*   Updated: 2022/07/05 11:40:39 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int	close_game(t_game *game)
 {
 	(void) game;
-	// mlx_destroy_window(game->mlx, game->mlx_win);
+	ft_putstr_fd("Exit\n", 1);
 	exit (EXIT_SUCCESS);
 }
 
@@ -31,81 +31,29 @@ void	print_steps(t_game *game)
 	free(s);
 }
 
-void	check_collectibles(t_game *game)
-{
-	if (game->colletctible == 0)
-	{
-		// put_img(game, game->empty_space_img, game->exit_x * game->img_size, game->exit_y * game->img_size);
-		// put_img(game, game->open_exit_img, game->exit_x * game->img_size, game->exit_y * game->img_size);
-		game->exit -= 1;
-	}
-}
-
 int    move_check(t_game *game, int x, int y) 
 {
 	if (game->map[y][x] == '0')
-	{
-		put_img(game, game->player_img, x * game->img_size, y * game->img_size);
-		put_img(game, game->empty_space_img, game->player_x * game->img_size, \
-				game->player_y * game->img_size);
 		return (1);
-	}
 	if (game->map[y][x] == 'C')
 	{
-		put_img(game, game->player_img, x * game->img_size, y * game->img_size);
-		put_img(game, game->empty_space_img, game->player_x * game->img_size, \
-				game->player_y * game->img_size);
 		game->colletctible -= 1;
-		check_collectibles(game);
+		if (game->colletctible == 0)
+			game->exit -= 1;
 		return (1);
 	}
-	if (game->map[y][x] == 'E') // check
+	if (game->map[y][x] == 'E')
 	{
         if (game->exit == 0)
         {
-			put_img(game, game->empty_space_img, game->player_x * game->img_size, \
-            		game->player_y * game->img_size);
 			ft_putstr_fd("You won! Well done!\n", 1);
 			mlx_destroy_window(game->mlx, game->mlx_win);
 			exit(EXIT_SUCCESS);
 		}
         ft_putstr_fd("You need to collect all coins to open the box\n", 1);
 	}
-	    return (0);
+	return (0);
 }
-
-/*bool    move_check(t_game *game, int x, int y) 
-{
-	if (game->map[y][x] == '0')
-	{
-		put_img(game, game->player_img, x * game->img_size, y * game->img_size);
-		put_img(game, game->empty_space_img, game->player_x * game->img_size, \
-				game->player_y * game->img_size);
-		return (true);
-	}
-	if (game->map[y][x] == 'C')
-	{
-		put_img(game, game->player_img, x * game->img_size, y * game->img_size);
-		put_img(game, game->empty_space_img, game->player_x * game->img_size, \
-				game->player_y * game->img_size);
-		game->colletctible -= 1;
-		check_collectibles(game);
-		return (true);
-	}
-	if (game->map[y][x] == 'E') // check
-	{
-        if (game->exit == 0)
-        {
-			put_img(game, game->empty_space_img, game->player_x * game->img_size, \
-            		game->player_y * game->img_size);
-			ft_putstr_fd("You won! Well done!\n", 1);
-			mlx_destroy_window(game->mlx, game->mlx_win);
-			exit(EXIT_SUCCESS);
-		}
-        ft_putstr_fd("You need to collect all coins to open the box\n", 1);
-	}
-	    return (false);
-} */
 
 void	move_up(t_game *game)
 {
@@ -120,8 +68,8 @@ void	move_up(t_game *game)
 		game->map[y][x] = 'P';
 		game->player_y = y;
         game->steps++;
-		print_steps(game);
-		printf("player: [%d][%d]\n", game->player_y, game->player_x);
+		// print_steps(game);
+		// printf("player: [%d][%d]\n", game->player_y, game->player_x);
 	}
 }
 
@@ -138,8 +86,8 @@ void	move_left(t_game *game)
 		game->map[y][x] = 'P';
 		game->player_x = x;
 		game->steps++;
-		print_steps(game);
-        printf("player: [%d][%d]\n", game->player_y, game->player_x);
+		// print_steps(game);
+        // printf("player: [%d][%d]\n", game->player_y, game->player_x);
 	}
 }
 
@@ -156,8 +104,8 @@ void	move_down(t_game *game)
 		game->map[y][x] = 'P';
 		game->player_y = y;
 		game->steps++;
-		print_steps(game);
-        printf("player: [%d][%d]\n", game->player_y, game->player_x);
+		// print_steps(game);
+        // printf("player: [%d][%d]\n", game->player_y, game->player_x);
 	}
 }
 
@@ -174,8 +122,8 @@ void	move_right(t_game *game)
 		game->map[y][x] = 'P';
 		game->player_x = x;
 		game->steps++;
-		print_steps(game);
-        printf("player: [%d][%d]\n", game->player_y, game->player_x);
+		// print_steps(game);
+        // printf("player: [%d][%d]\n", game->player_y, game->player_x);
 	}
 }
 
@@ -192,8 +140,10 @@ int	key_hook(int keycode, t_game *game)
 		move_right(game);
 	else if (keycode == 53) // ESC
     {
+		ft_putstr_fd("Exit\n", 1);
         mlx_destroy_window(game->mlx, game->mlx_win);
 		exit(EXIT_SUCCESS);
     }
+	print_steps(game);
 	return (0);
 }

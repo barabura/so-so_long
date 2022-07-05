@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 16:56:58 by baura             #+#    #+#             */
-/*   Updated: 2022/06/17 17:15:03 by baura            ###   ########.fr       */
+/*   Updated: 2022/07/05 12:18:35 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	check_symbols_amount(t_game *game)
 	while (game->map[game->height - 1][w])
 	{
 		if (game->map[game->height - 1][w] != '1')
-			error_message("There're no walls at the bottom line");
+			error_message("The map should be surrounded by walls");
 		w++;
 	}
 	if (game->player < 1)
@@ -66,7 +66,7 @@ void	check_map_params(t_game *game) // ADD check last string for 1111111 - DONE
 	while (game->map[0][game->width])
 	{
 		if (game->map[0][game->width] != '1')
-			error_message("There're no walls at the top line");
+			error_message("The map should be surrounded by walls");
 		game->width += 1;
 	}
 	//printf("width: %d\n", game->width);
@@ -78,7 +78,7 @@ void	check_map_params(t_game *game) // ADD check last string for 1111111 - DONE
 			error_message("Map's not rectangle");
 		if ((game->map[game->height][0] != '1') ||
 			(game->map[game->height][game->width - 1] != '1'))
-			error_message("There're no walls on the sides");
+			error_message("The map should be surrounded by walls");
 		check_map_symbols(game);
 		game->height += 1;
 		if (game->height > 28) // and this one check
