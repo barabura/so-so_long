@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 16:31:45 by baura             #+#    #+#             */
-/*   Updated: 2022/07/06 17:35:57 by baura            ###   ########.fr       */
+/*   Updated: 2022/07/06 17:53:44 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ void change_coin(t_game *game, int x, int y, int i)
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->empty_space_img, x * game->img_size, y * game->img_size);
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->collectable_img, x * game->img_size, y * game->img_size);
 	}
-	
 }
 
 void collectable_animation(t_game *game, int i)
@@ -128,7 +127,7 @@ void collectable_animation(t_game *game, int i)
 
 
 
-void	enemy_move(char *enemy)
+void	enemy_move(t_game *game, char *enemy)
 {
 	static int	next = 1;
 
@@ -137,7 +136,7 @@ void	enemy_move(char *enemy)
 		enemy[0] = '0';
 		enemy[next] = 'F';
 		ft_putstr_fd("You lose!\n", 1);
-		// mlx_destroy_window(game->mlx, game->mlx_win);
+		mlx_destroy_window(game->mlx, game->mlx_win);
 		exit(EXIT_FAILURE);
 	}
 	if (enemy[next] != '0')
@@ -151,7 +150,7 @@ void	enemy_move(char *enemy)
 	}
 }
 
-void	enemy_animation(char **map)
+void	enemy_animation(t_game *game, char **map)
 {
 	static int	n;
 	int			i;
@@ -163,7 +162,7 @@ void	enemy_animation(char **map)
 		{
 			if (map[0][i] == 'F')
 			{
-				enemy_move(&map[0][i]);
+				enemy_move(game, &map[0][i]);
 				i++;
 			}
 			i++;
@@ -174,53 +173,12 @@ void	enemy_animation(char **map)
 		n = 0;
 }
 
-// void	enemy_move(t_game *game, int x, int y)
-// {
-// 	static int	next;
-// 	next = x + 1;
-// 	if (game->map[y][next] == '0')
-// 	{
-// 		game->map[y][next] = 'F';
-// 		game->map[y][x] = '0';
-// 	}
-// 	if (game->map[y][next] != '0')
-// 		next = x - 1;
-// 	if (game->map[y][next] == 'P')
-// 	{
-// 		ft_putstr_fd("You lose!\n", 1);
-// 		mlx_destroy_window(game->mlx, game->mlx_win);
-// 		exit(EXIT_FAILURE);
-// 	}
-// }
-// void	enemy_animation(t_game *game)
-// {
-// 	int	x;
-// 	int	y;
-// 	static int	i;
-// 	y = 0;
-// 	while (++y < game->height && i == 25)
-// 	{
-// 		x = 0;
-// 		while (game->map[y][++x])
-// 		{
-// 			if (game->map[y][x] == 'F')
-// 				enemy_move(game, x, y);
-// 		}
-// 	}
-// 	i++;
-// 	if (i > 50)
-// 		i = 0;
-// }
-
-
-
-
 int get_animation(t_game *game)
 {
 	static int	i;
 
 	collectable_animation(game, i);
-	enemy_animation(game->map);
+	enemy_animation(game, game->map);
 	i++;
 	if (i > 60)
 		i = 0;
