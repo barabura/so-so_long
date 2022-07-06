@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 16:31:45 by baura             #+#    #+#             */
-/*   Updated: 2022/07/06 14:30:45 by baura            ###   ########.fr       */
+/*   Updated: 2022/07/06 15:24:50 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	init_game(t_game *game)
 	game->height = 0;
 	game->player = 0;
 	game->colletctible = 0;
+	game->enemy = 0;
 	game->exit = 0;
 	game->steps = 0;
 	game->img_size = 100;
@@ -51,6 +52,8 @@ void	init_images(t_game *game)
 	game->collectable6_img = mlx_xpm_file_to_image(game->mlx, "./imgs/coin_6.xpm", &game->img_w, &game->img_h);
 	game->player_img = mlx_xpm_file_to_image(game->mlx, "./imgs/cat_1.xpm", &game->img_w, &game->img_h);
 	game->player2_img = mlx_xpm_file_to_image(game->mlx, "./imgs/cat_2.xpm", &game->img_w, &game->img_h);
+	game->enemy_l_img = mlx_xpm_file_to_image(game->mlx, "./imgs/cleaner_1.xpm", &game->img_w, &game->img_h);
+	game->enemy_r_img = mlx_xpm_file_to_image(game->mlx, "./imgs/cleaner_2.xpm", &game->img_w, &game->img_h);
 	game->exit_img = mlx_xpm_file_to_image(game->mlx, "./imgs/closed_box.xpm", &game->img_w, &game->img_h);	
 	game->exit2_img = mlx_xpm_file_to_image(game->mlx, "./imgs/open_box.xpm", &game->img_size, &game->img_size);
 }
@@ -67,8 +70,6 @@ t_game	*init(void)
 	}
 	return (game);
 }
-
-
 
 void change_coin(t_game *game, int x, int y, int i)
 {
@@ -137,10 +138,8 @@ int get_animation(t_game *game)
 
 int	main(int argc, char **argv)
 {
-	// t_game	game;
 	t_game	*game;
 	int 	fd = 0;
-	//int		i = 0;
 		
 	if (argc < 2)
 		error_message("You must use a map to start the game");
@@ -157,7 +156,6 @@ int	main(int argc, char **argv)
 	check_map_params(game);
 	make_window(game);
 	init_images(game);
-	// fill_window(game); //*****
 	
 	//while (game.map[i] != NULL)
 	//{
@@ -171,9 +169,9 @@ int	main(int argc, char **argv)
 	//	game.width += 1;
 	//printf("%d", game.width);
 	
-	mlx_key_hook(game->mlx_win, key_hook, game); // change 0
+	mlx_key_hook(game->mlx_win, key_hook, game);
 	mlx_hook(game->mlx_win, 17, 1L << 0, close_game, game);
-	mlx_loop_hook(game->mlx, fill_window, game); //get_animation
+	mlx_loop_hook(game->mlx, fill_window, game);
 	mlx_loop(game->mlx);
 	return (0);
 }

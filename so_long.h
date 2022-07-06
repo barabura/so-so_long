@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 16:31:48 by baura             #+#    #+#             */
-/*   Updated: 2022/07/06 14:22:40 by baura            ###   ########.fr       */
+/*   Updated: 2022/07/06 15:23:25 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_game
 	int		player_x;
 	int		player_y;
 	int		colletctible;
+	int		enemy;
 	int		exit;
 	int		exit_x;
 	int		exit_y;
@@ -55,6 +56,8 @@ typedef struct s_game
 	void	*collectable4_img;
 	void	*collectable5_img;
 	void	*collectable6_img;
+	void	*enemy_r_img;
+	void	*enemy_l_img;
 	void	*exit_img;
 	void	*exit2_img;
 	void	*player_img;

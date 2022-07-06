@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 22:06:41 by baura             #+#    #+#             */
-/*   Updated: 2022/07/06 14:19:19 by baura            ###   ########.fr       */
+/*   Updated: 2022/07/06 15:33:16 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,12 @@ int    move_check(t_game *game, int x, int y)
 			exit(EXIT_SUCCESS);
 		}
         ft_putstr_fd("You need to collect all coins to open the box\n", 1);
+	}
+	if (game->map[y][x] == 'F')
+	{
+		ft_putstr_fd("You lose!\n", 1);
+		mlx_destroy_window(game->mlx, game->mlx_win);
+		exit(EXIT_FAILURE);
 	}
 	return (0);
 }

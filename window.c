@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 21:17:06 by baura             #+#    #+#             */
-/*   Updated: 2022/07/06 14:24:03 by baura            ###   ########.fr       */
+/*   Updated: 2022/07/06 15:32:00 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,11 @@ int	fill_window(t_game *game)
 			{
 				mlx_put_image_to_window(game->mlx, game->mlx_win, game->empty_space_img, w * game->img_size, h * game->img_size);
 				mlx_put_image_to_window(game->mlx, game->mlx_win, game->collectable_img, w * game->img_size, h * game->img_size);
+			}
+			if (game->map[h][w] == 'F')
+			{
+				mlx_put_image_to_window(game->mlx, game->mlx_win, game->empty_space_img, w * game->img_size, h * game->img_size);
+				mlx_put_image_to_window(game->mlx, game->mlx_win, game->enemy_r_img, w * game->img_size, h * game->img_size);
 			}
 			if (game->map[h][w] == 'P')
 			{
