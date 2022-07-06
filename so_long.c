@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 16:31:45 by baura             #+#    #+#             */
-/*   Updated: 2022/07/06 15:24:50 by baura            ###   ########.fr       */
+/*   Updated: 2022/07/06 17:35:57 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,11 +123,104 @@ void collectable_animation(t_game *game, int i)
 	}
 }
 
+
+
+
+
+
+void	enemy_move(char *enemy)
+{
+	static int	next = 1;
+
+	if (enemy[next] == 'P')
+	{
+		enemy[0] = '0';
+		enemy[next] = 'F';
+		ft_putstr_fd("You lose!\n", 1);
+		// mlx_destroy_window(game->mlx, game->mlx_win);
+		exit(EXIT_FAILURE);
+	}
+	if (enemy[next] != '0')
+	{
+		next = -next;
+	}
+	if (enemy[next] == '0')
+	{
+		enemy[0] = '0';
+		enemy[next] = 'F';
+	}
+}
+
+void	enemy_animation(char **map)
+{
+	static int	n;
+	int			i;
+
+	while (*map && n == 30)
+	{
+		i = 0;
+		while ((*map)[i])
+		{
+			if (map[0][i] == 'F')
+			{
+				enemy_move(&map[0][i]);
+				i++;
+			}
+			i++;
+		}
+		map++;
+	}
+	if (++n > 60)
+		n = 0;
+}
+
+// void	enemy_move(t_game *game, int x, int y)
+// {
+// 	static int	next;
+// 	next = x + 1;
+// 	if (game->map[y][next] == '0')
+// 	{
+// 		game->map[y][next] = 'F';
+// 		game->map[y][x] = '0';
+// 	}
+// 	if (game->map[y][next] != '0')
+// 		next = x - 1;
+// 	if (game->map[y][next] == 'P')
+// 	{
+// 		ft_putstr_fd("You lose!\n", 1);
+// 		mlx_destroy_window(game->mlx, game->mlx_win);
+// 		exit(EXIT_FAILURE);
+// 	}
+// }
+// void	enemy_animation(t_game *game)
+// {
+// 	int	x;
+// 	int	y;
+// 	static int	i;
+// 	y = 0;
+// 	while (++y < game->height && i == 25)
+// 	{
+// 		x = 0;
+// 		while (game->map[y][++x])
+// 		{
+// 			if (game->map[y][x] == 'F')
+// 				enemy_move(game, x, y);
+// 		}
+// 	}
+// 	i++;
+// 	if (i > 50)
+// 		i = 0;
+// }
+
+
+
+
 int get_animation(t_game *game)
 {
 	static int	i;
 
 	collectable_animation(game, i);
+	enemy_animation(game->map);
 	i++;
 	if (i > 60)
 		i = 0;
