@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 16:31:45 by baura             #+#    #+#             */
-/*   Updated: 2022/07/06 13:46:18 by baura            ###   ########.fr       */
+/*   Updated: 2022/07/06 14:30:45 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,72 +70,68 @@ t_game	*init(void)
 
 
 
+void change_coin(t_game *game, int x, int y, int i)
+{
+	if (i > 10)
+	{
+		mlx_put_image_to_window(game->mlx, game->mlx_win, game->empty_space_img, x * game->img_size, y * game->img_size);
+		mlx_put_image_to_window(game->mlx, game->mlx_win, game->collectable2_img, x * game->img_size, y * game->img_size);
+	}
+	if (i > 20)
+	{
+		mlx_put_image_to_window(game->mlx, game->mlx_win, game->empty_space_img, x * game->img_size, y * game->img_size);
+		mlx_put_image_to_window(game->mlx, game->mlx_win, game->collectable3_img, x * game->img_size, y * game->img_size);
+	}
+	if (i > 30)
+	{
+		mlx_put_image_to_window(game->mlx, game->mlx_win, game->empty_space_img, x * game->img_size, y * game->img_size);
+		mlx_put_image_to_window(game->mlx, game->mlx_win, game->collectable4_img, x * game->img_size, y * game->img_size);
+	}
+	if (i > 40)
+	{
+		mlx_put_image_to_window(game->mlx, game->mlx_win, game->empty_space_img, x * game->img_size, y * game->img_size);
+		mlx_put_image_to_window(game->mlx, game->mlx_win, game->collectable5_img, x * game->img_size, y * game->img_size);
+	}
+	if (i > 50)
+	{
+		mlx_put_image_to_window(game->mlx, game->mlx_win, game->empty_space_img, x * game->img_size, y * game->img_size);
+		mlx_put_image_to_window(game->mlx, game->mlx_win, game->collectable6_img, x * game->img_size, y * game->img_size);
+	}
+	else if (i < 10)
+	{
+		mlx_put_image_to_window(game->mlx, game->mlx_win, game->empty_space_img, x * game->img_size, y * game->img_size);
+		mlx_put_image_to_window(game->mlx, game->mlx_win, game->collectable_img, x * game->img_size, y * game->img_size);
+	}
+	
+}
 
-// void change_coin(t_game *game, int x, int y, int i)
-// {
-// 	if (i > 10)
-// 	{
-// 		// game->collectable_img = 
-// 		put_img(game, game->empty_space_img, x, y);
-// 		put_img(game, "./imgs/coin_2.xpm", x, y);
-// 	}
-// 	if (i > 20)
-// 	{
-// 		put_img(game, game->empty_space_img, x, y);
-// 		put_img(game, "./imgs/coin_3.xpm", x, y);
-// 	}
-// 	if (i > 30)
-// 	{
-// 		put_img(game, game->empty_space_img, x, y);
-// 		put_img(game, "./imgs/coin_4.xpm", x, y);
-// 	}
-// 	if (i > 40)
-// 	{
-// 		put_img(game, game->empty_space_img, x, y);
-// 		put_img(game, "./imgs/coin_5.xpm", x, y);
-// 	}
-// 	if (i > 50)
-// 	{
-// 		put_img(game, game->empty_space_img, x, y);
-// 		put_img(game, "./imgs/coin_6.xpm", x, y);
-// 	}
-// 	else if (i < 10)
-// 	{
-// 		put_img(game, game->empty_space_img, x, y);
-// 		put_img(game, "./imgs/coin_1.xpm", x, y);
-// 	}
-// }
+void collectable_animation(t_game *game, int i)
+{
+	int	x;
+	int	y;
 
-// void collectable_animation(t_game *game, int i)
-// {
-// 	int	x;
-// 	int	y;
+	y = 0;
+	while (++y < game->height)
+	{
+		x = 0;
+		while (game->map[y][++x])
+		{
+			if (game->map[y][x] == 'C')
+				change_coin(game, x, y, i);
+		}
+	}
+}
 
-// 	y = 0;
-// 	while (++y < game->height)
-// 	{
-// 		x = 0;
-// 		while (game->map[y][++x])
-// 		{
-// 			if (game->map[y][x] == 'C')
-// 			{
-// 				printf("%c", game->map[y][x]);	
-// 				change_coin(game, x, y, i);
-// 			}
-// 		}
-// 	}
-// }
+int get_animation(t_game *game)
+{
+	static int	i;
 
-// int get_animation(t_game *game)
-// {
-// 	static int	i;
-
-// 	collectable_animation(game, i);
-// 	i++;
-// 	if (i > 60)
-// 		i = 0;
-// 	return (0);
-// }
+	collectable_animation(game, i);
+	i++;
+	if (i > 60)
+		i = 0;
+	return (0);
+}
 
 
 
@@ -161,7 +157,7 @@ int	main(int argc, char **argv)
 	check_map_params(game);
 	make_window(game);
 	init_images(game);
-	fill_window(game);
+	// fill_window(game); //*****
 	
 	//while (game.map[i] != NULL)
 	//{
@@ -177,7 +173,7 @@ int	main(int argc, char **argv)
 	
 	mlx_key_hook(game->mlx_win, key_hook, game); // change 0
 	mlx_hook(game->mlx_win, 17, 1L << 0, close_game, game);
-	// mlx_loop_hook(game->mlx, get_animation, game);
+	mlx_loop_hook(game->mlx, fill_window, game); //get_animation
 	mlx_loop(game->mlx);
 	return (0);
 }

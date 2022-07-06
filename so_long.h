@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 16:31:48 by baura             #+#    #+#             */
-/*   Updated: 2022/07/06 13:45:44 by baura            ###   ########.fr       */
+/*   Updated: 2022/07/06 14:22:40 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,9 @@ void	put_img(t_game *game, void *path, int x, int y);
 int		key_hook(int keycode, t_game *game);
 int		close_game(t_game *game);
 
-// int	render_next_frame(t_game *game);
 void	check_coins_near(t_game *game);
-void	fill_window(t_game *game); 
+int		fill_window(t_game *game);
+void	print_steps(t_game *game);
+int 	get_animation(t_game *game);
 
 #endif
