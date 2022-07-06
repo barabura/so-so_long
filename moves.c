@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 22:06:41 by baura             #+#    #+#             */
-/*   Updated: 2022/07/05 19:36:03 by baura            ###   ########.fr       */
+/*   Updated: 2022/07/06 13:37:12 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void	check_collectibles(t_game *game)
 	if (game->colletctible == 0)
 	{
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->empty_space_img, game->exit_x * game->img_size, game->exit_y * game->img_size); // bonus
-		// mlx_put_image_to_window(game->mlx, game->mlx_win, game->exit2_img, game->exit_x * game->img_size, game->exit_y * game->img_size); // bonus
-		put_img(game, "./imgs/open_box.xpm", game->exit_x * game->img_size, game->exit_y * game->img_size); //bonus
+		mlx_put_image_to_window(game->mlx, game->mlx_win, game->exit2_img, game->exit_x * game->img_size, game->exit_y * game->img_size); // bonus
+		// put_img(game, "./imgs/open_box.xpm", game->exit_x * game->img_size, game->exit_y * game->img_size); //bonus
 		game->exit -= 1;
 	}
 }

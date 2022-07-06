@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 16:31:48 by baura             #+#    #+#             */
-/*   Updated: 2022/07/05 19:35:53 by baura            ###   ########.fr       */
+/*   Updated: 2022/07/06 13:45:44 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,21 @@ typedef struct s_game
 
 	void	*mlx;
 	void	*mlx_win;
+	
 	int		img_size;
-	void	*img_ptr;
+	int		img_w;
+	int		img_h;
 
 	void	*empty_space_img;
 	void	*wall_img;
-	
 	void	*collectable_img;
 	void	*collectable2_img;
 	void	*collectable3_img;
 	void	*collectable4_img;
 	void	*collectable5_img;
 	void	*collectable6_img;
-	
 	void	*exit_img;
-	// void	*exit2_img;
-	
+	void	*exit2_img;
 	void	*player_img;
 	void	*player2_img;
 

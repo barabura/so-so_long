@@ -6,19 +6,11 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 21:17:06 by baura             #+#    #+#             */
-/*   Updated: 2022/07/05 19:25:45 by baura            ###   ########.fr       */
+/*   Updated: 2022/07/06 13:44:29 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void	put_img(t_game *game, void *path, int x, int y)
-{
-	game->img_ptr = mlx_xpm_file_to_image(game->mlx, path, &game->img_size, &game->img_size);
-	if (game->img_ptr == NULL)
-		error_message("Image opening error");
-	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img_ptr, x, y);
-}
 
 void	check_coins_near(t_game *game) // bonus
 {

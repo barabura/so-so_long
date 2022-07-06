@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 16:31:45 by baura             #+#    #+#             */
-/*   Updated: 2022/07/05 19:35:48 by baura            ###   ########.fr       */
+/*   Updated: 2022/07/06 13:46:18 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	init_game(t_game *game)
 	game->exit = 0;
 	game->steps = 0;
 	game->img_size = 100;
+	game->img_h = 0;
+	game->img_w = 0;
 }
 
 void	check_argument(char *arg)
@@ -39,18 +41,18 @@ void	check_argument(char *arg)
 
 void	init_images(t_game *game)
 {
-	game->empty_space_img = mlx_xpm_file_to_image(game->mlx, "./imgs/background.xpm", &game->img_size, &game->img_size);
-	game->wall_img = mlx_xpm_file_to_image(game->mlx, "./imgs/wall.xpm", &game->img_size, &game->img_size);
-	game->collectable_img = mlx_xpm_file_to_image(game->mlx, "./imgs/coin_1.xpm", &game->img_size, &game->img_size);
-	game->collectable2_img = mlx_xpm_file_to_image(game->mlx, "./imgs/coin_2.xpm", &game->img_size, &game->img_size);
-	game->collectable3_img = mlx_xpm_file_to_image(game->mlx, "./imgs/coin_3.xpm", &game->img_size, &game->img_size);
-	game->collectable4_img = mlx_xpm_file_to_image(game->mlx, "./imgs/coin_4.xpm", &game->img_size, &game->img_size);
-	game->collectable5_img = mlx_xpm_file_to_image(game->mlx, "./imgs/coin_5.xpm", &game->img_size, &game->img_size);
-	game->collectable6_img = mlx_xpm_file_to_image(game->mlx, "./imgs/coin_6.xpm", &game->img_size, &game->img_size);
-	game->player_img = mlx_xpm_file_to_image(game->mlx, "./imgs/cat_1.xpm", &game->img_size, &game->img_size);
-	game->player2_img = mlx_xpm_file_to_image(game->mlx, "./imgs/cat_2.xpm", &game->img_size, &game->img_size);
-	game->exit_img = mlx_xpm_file_to_image(game->mlx, "./imgs/closed_box.xpm", &game->img_size, &game->img_size);	
-	// game->exit2_img = mlx_xpm_file_to_image(game->mlx, "./imgs/open_box.xpm", &game->img_size, &game->img_size);
+	game->empty_space_img = mlx_xpm_file_to_image(game->mlx, "./imgs/background.xpm", &game->img_w, &game->img_h);
+	game->wall_img = mlx_xpm_file_to_image(game->mlx, "./imgs/wall.xpm", &game->img_w, &game->img_h);
+	game->collectable_img = mlx_xpm_file_to_image(game->mlx, "./imgs/coin_1.xpm", &game->img_w, &game->img_h);
+	game->collectable2_img = mlx_xpm_file_to_image(game->mlx, "./imgs/coin_2.xpm", &game->img_w, &game->img_h);
+	game->collectable3_img = mlx_xpm_file_to_image(game->mlx, "./imgs/coin_3.xpm", &game->img_w, &game->img_h);
+	game->collectable4_img = mlx_xpm_file_to_image(game->mlx, "./imgs/coin_4.xpm", &game->img_w, &game->img_h);
+	game->collectable5_img = mlx_xpm_file_to_image(game->mlx, "./imgs/coin_5.xpm", &game->img_w, &game->img_h);
+	game->collectable6_img = mlx_xpm_file_to_image(game->mlx, "./imgs/coin_6.xpm", &game->img_w, &game->img_h);
+	game->player_img = mlx_xpm_file_to_image(game->mlx, "./imgs/cat_1.xpm", &game->img_w, &game->img_h);
+	game->player2_img = mlx_xpm_file_to_image(game->mlx, "./imgs/cat_2.xpm", &game->img_w, &game->img_h);
+	game->exit_img = mlx_xpm_file_to_image(game->mlx, "./imgs/closed_box.xpm", &game->img_w, &game->img_h);	
+	game->exit2_img = mlx_xpm_file_to_image(game->mlx, "./imgs/open_box.xpm", &game->img_size, &game->img_size);
 }
 
 t_game	*init(void)
@@ -150,16 +152,11 @@ int	main(int argc, char **argv)
 		error_message("Excessive number of arguments. You can use only 1 map at a time");
 	if (argc == 2)
 		check_argument(argv[1]);
-	// init_game(&game);
 	game = init();
 	init_game(game);
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		error_message("Map opening error");
-	// convert_map_to_array(fd, &game);
-	// check_map_params(&game);
-	// init_images(&game);
-	// make_window(&game);
 	convert_map_to_array(fd, game);
 	check_map_params(game);
 	make_window(game);
@@ -178,9 +175,6 @@ int	main(int argc, char **argv)
 	//	game.width += 1;
 	//printf("%d", game.width);
 	
-	// mlx_key_hook(game.mlx_win, key_hook, &game); // change 0
-	// mlx_hook(game.mlx_win, 17, 1L << 0, close_game, &game);
-	// mlx_loop(game.mlx);
 	mlx_key_hook(game->mlx_win, key_hook, game); // change 0
 	mlx_hook(game->mlx_win, 17, 1L << 0, close_game, game);
 	// mlx_loop_hook(game->mlx, get_animation, game);
