@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:12:25 by baura             #+#    #+#             */
-/*   Updated: 2022/06/17 17:24:59 by baura            ###   ########.fr       */
+/*   Updated: 2022/07/07 16:12:34 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,7 @@ void	convert_map_to_array(int fd, t_game *game)
 		saved_str = sl_strjoin(saved_str, buf);
 	}
 	free(buf);
-	//printf("saved:\n%s\n", saved_str);
 	game->map = ft_split(saved_str, '\n');
 	free(saved_str);
-	if (close(fd) == -1)
-		error_message("Map file close error");
+	close(fd);
 }

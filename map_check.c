@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 16:56:58 by baura             #+#    #+#             */
-/*   Updated: 2022/07/06 15:29:20 by baura            ###   ########.fr       */
+/*   Updated: 2022/07/07 16:04:10 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	check_symbols_amount(t_game *game)
 {
 	int	w;
-	
+
 	w = 0;
 	while (game->map[game->height - 1][w])
 	{
@@ -49,23 +49,20 @@ void	check_map_symbols(t_game *game)
 			error_message("Invalid symbols on the map");
 		if (game->map[game->height][width] == 'P')
 			game->player++;
-		//printf("player: %d\n", game->player); // comment it
 		if (game->player > 1)
 			error_message("There must be one player");
 		if (game->map[game->height][width] == 'F')
 			game->enemy++;
 		if (game->map[game->height][width] == 'C')
 			game->colletctible++;
-		//printf("collectible: %d\n", game->colletctible); // comment it
 		if (game->map[game->height][width] == 'E')
 			game->exit++;
-		//printf("exit: %d\n", game->exit); // comment it
 		if (game->exit > 1)
 			error_message("There must be one exit");
 	}
 }
 
-void	check_map_params(t_game *game) // ADD check last string for 1111111 - DONE
+void	check_map_params(t_game *game)
 {
 	while (game->map[0][game->width])
 	{
@@ -73,8 +70,7 @@ void	check_map_params(t_game *game) // ADD check last string for 1111111 - DONE
 			error_message("The map should be surrounded by walls");
 		game->width += 1;
 	}
-	//printf("width: %d\n", game->width);
-	if (game->width > 51) // check this number
+	if (game->width > 51)
 		error_message("The map is too wide");
 	while (game->map[game->height])
 	{
@@ -85,9 +81,8 @@ void	check_map_params(t_game *game) // ADD check last string for 1111111 - DONE
 			error_message("The map should be surrounded by walls");
 		check_map_symbols(game);
 		game->height += 1;
-		if (game->height > 28) // and this one check
+		if (game->height > 28)
 			error_message("Map's too high");
 	}
-	//printf("height: %d\n", game->height);
 	check_symbols_amount(game);
 }

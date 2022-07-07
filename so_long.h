@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 16:31:48 by baura             #+#    #+#             */
-/*   Updated: 2022/07/07 14:30:45 by baura            ###   ########.fr       */
+/*   Updated: 2022/07/07 16:27:54 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,7 @@ typedef struct s_game
 	void	*collectable4_img;
 	void	*collectable5_img;
 	void	*collectable6_img;
-	void	*enemy_r_img;
-	void	*enemy_l_img;
+	void	*enemy_img;
 	void	*exit_img;
 	void	*exit2_img;
 	void	*player_img;
@@ -74,17 +73,15 @@ void	init_game(t_game *game);
 void	init_images(t_game *game);
 
 
-
-
 void	convert_map_to_array(int fd, t_game *game);
 void	check_map_params(t_game *game);
 void	make_window(t_game *game);
-void	put_img(t_game *game, void *path, int x, int y);
+
+int	move_check(t_game *game, int x, int y);
 
 int		key_hook(int keycode, t_game *game);
 int		close_game(t_game *game);
 
-void	check_coins_near(t_game *game);
 int		fill_window(t_game *game);
 void	print_steps(t_game *game);
 int 	get_animation(t_game *game);
