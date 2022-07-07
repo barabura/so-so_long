@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 21:17:06 by baura             #+#    #+#             */
-/*   Updated: 2022/07/07 16:16:19 by baura            ###   ########.fr       */
+/*   Updated: 2022/07/07 16:38:27 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	fill_window(t_game *game)
 {
 	int	w;
 	int	h;
-	
+
 	h = -1;
 	while (++h < game->height)
 	{
@@ -88,11 +88,4 @@ int	fill_window(t_game *game)
 	get_animation(game);
 	print_steps(game);
 	return (1);
-}
-
-void	make_window(t_game *game)
-{
-	game->mlx = mlx_init();
-	game->mlx_win = mlx_new_window(game->mlx, game->width * game->img_size, \
-					game->height * game->img_size, "so_long");
 }

@@ -6,7 +6,7 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 16:31:41 by baura             #+#    #+#             */
-/*   Updated: 2022/07/07 16:24:47 by baura            ###   ########.fr       */
+/*   Updated: 2022/07/07 16:38:04 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,11 @@ void	print_steps(t_game *game)
 	mlx_string_put(game->mlx, game->mlx_win, 10, 10, 0x000000, "Steps: ");
 	mlx_string_put(game->mlx, game->mlx_win, 75, 10, 0x000000, s);
 	free(s);
+}
+
+void	make_window(t_game *game)
+{
+	game->mlx = mlx_init();
+	game->mlx_win = mlx_new_window(game->mlx, game->width * game->img_size, \
+					game->height * game->img_size, "so_long");
 }
