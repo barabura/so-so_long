@@ -6,32 +6,13 @@
 /*   By: baura <baura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 22:06:41 by baura             #+#    #+#             */
-/*   Updated: 2022/07/06 15:33:16 by baura            ###   ########.fr       */
+/*   Updated: 2022/07/07 14:30:25 by baura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <stdbool.h>
 
-int	close_game(t_game *game)
-{
-	(void) game;
-	ft_putstr_fd("Exit\n", 1);
-	exit (EXIT_SUCCESS);
-}
-
-//void	print_steps(t_game *game)
-//{
-//	char	*s;
-//
-//	s = ft_itoa(game->steps);
-//	ft_putstr_fd("STEPS = ", 1);
-//	ft_putstr_fd(s, 1);
-//	ft_putchar_fd('\n', 1);
-//	free(s);
-//}
-
-void	print_steps(t_game *game) // bonus
+void	print_steps(t_game *game)
 {
 	char	*s;
 
@@ -52,15 +33,11 @@ int    move_check(t_game *game, int x, int y)
 			game->exit -= 1;
 		return (1);
 	}
-	if (game->map[y][x] == 'E')
+	if (game->map[y][x] == 'E' && game->exit == 0)
 	{
-        if (game->exit == 0)
-        {
-			ft_putstr_fd("You won! Well done!\n", 1);
-			mlx_destroy_window(game->mlx, game->mlx_win);
-			exit(EXIT_SUCCESS);
-		}
-        ft_putstr_fd("You need to collect all coins to open the box\n", 1);
+		ft_putstr_fd("You won! Well done!\n", 1);
+		mlx_destroy_window(game->mlx, game->mlx_win);
+		exit(EXIT_SUCCESS);
 	}
 	if (game->map[y][x] == 'F')
 	{
@@ -84,8 +61,6 @@ void	move_up(t_game *game)
 		game->map[y][x] = 'P';
 		game->player_y = y;
         game->steps++;
-		// print_steps(game);
-		// printf("player: [%d][%d]\n", game->player_y, game->player_x);
 	}
 }
 
@@ -102,8 +77,6 @@ void	move_left(t_game *game)
 		game->map[y][x] = 'P';
 		game->player_x = x;
 		game->steps++;
-		// print_steps(game);
-        // printf("player: [%d][%d]\n", game->player_y, game->player_x);
 	}
 }
 
@@ -120,8 +93,6 @@ void	move_down(t_game *game)
 		game->map[y][x] = 'P';
 		game->player_y = y;
 		game->steps++;
-		// print_steps(game);
-        // printf("player: [%d][%d]\n", game->player_y, game->player_x);
 	}
 }
 
